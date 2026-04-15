@@ -75,19 +75,12 @@ def get_fashion_mnist_dataset(transform):
     return train_dataset, test_dataset
 
 def get_fashion_mnist_dataloaders(batch_size=64, num_workers=2):
-    """
-    创建FashionMNIST数据集的训练集和测试集DataLoader
     
-    参数:
-    batch_size: 每个batch的样本数量
-    num_workers: 数据加载的线程数
-    """
-    # 定义数据转换
     transform = transforms.Compose([
         transforms.ToTensor(),  # 将PIL图像或numpy数组转换为Tensor
     ])
     
-    # 下载训练集
+    
     train_dataset = datasets.FashionMNIST(
         root='./data', 
         train=True,
@@ -95,7 +88,7 @@ def get_fashion_mnist_dataloaders(batch_size=64, num_workers=2):
         transform=transform
     )
     
-    # 下载测试集
+    
     test_dataset = datasets.FashionMNIST(
         root='./data',
         train=False,
@@ -103,18 +96,18 @@ def get_fashion_mnist_dataloaders(batch_size=64, num_workers=2):
         transform=transform
     )
     
-    # 创建DataLoader
+    
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
-        shuffle=True,  # 训练集需要打乱
+        shuffle=True,  
         num_workers=num_workers
     )
     
     test_loader = DataLoader(
         test_dataset,
         batch_size=batch_size,
-        shuffle=False,  # 测试集不需要打乱
+        shuffle=False, 
         num_workers=num_workers
     )
     
