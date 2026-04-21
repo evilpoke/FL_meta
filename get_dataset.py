@@ -2,6 +2,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 def partition_data_dirichlet(dataset:datasets.FashionMNIST, num_clients, alpha):
     """
@@ -42,7 +43,7 @@ def partition_data_dirichlet(dataset:datasets.FashionMNIST, num_clients, alpha):
     
     return client_indices
 
-def plot_client_class_distribution(client_data_indices, dataset, num_clients, method_name):
+def plot_client_class_distribution(client_data_indices, dataset, num_clients, method_name, path):
     plt.figure(figsize=(15, 5))
     for client_id in range(num_clients):
         plt.subplot(2, num_clients//2, client_id+1) # Adjust subplot grid as needed
@@ -55,7 +56,7 @@ def plot_client_class_distribution(client_data_indices, dataset, num_clients, me
     plt.suptitle(f'Class Distribution per Client ({method_name})')
     plt.tight_layout()
     plt.show()
-    plt.savefig(f'/home/FL_meta/data_distribution_{method_name}.png')
+    plt.savefig('./data_distribution_{method_name}.png')
     plt.clf()
 
 def get_fashion_mnist_dataset(transform):
